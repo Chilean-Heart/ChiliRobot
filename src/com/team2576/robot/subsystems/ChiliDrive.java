@@ -7,6 +7,7 @@ package com.team2576.robot.subsystems;
  */
 
 import com.team2576.lib.Debugger;
+import com.team2576.lib.util.ChiliFunctions;
 import com.team2576.robot.io.*;
 
 public class ChiliDrive implements SubComponent{
@@ -28,20 +29,27 @@ public class ChiliDrive implements SubComponent{
 	}
 	
 	@SuppressWarnings("unused")
-	private double[] mecanumDrive(double x, double y, double rotation, double gyroAngle, 
-    		double gyroDrift, double accelXDrift, double accelYDrift) {
-		return null;
+	private double[] arcadeDrive(double forward, double rotation) {
+		double left = forward + rotation;
+		double right = forward - rotation;
+		
+		double[] forces = {left, left, right, right};
+		forces = ChiliFunctions.normalize(forces);
+		
+		return forces;
 	}
 	
 	@SuppressWarnings("unused")
 	private double[] tankDrive(double left, double right) {
-		return null;
+		return new double[]{left, left, right, right};  
 	}
 	
 	@SuppressWarnings("unused")
-	private double[] arcadeDrive(double forward, double rotation) {
+	private double[] mecanumDrive(double x, double y, double rotation, double gyroAngle, 
+    		double gyroDrift, double accelXDrift, double accelYDrift) {
 		return null;
-	}
+	}	
+	
 	
 	/**
 	 * TODO
